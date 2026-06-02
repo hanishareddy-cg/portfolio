@@ -61,6 +61,42 @@ ul {
 }
 
 /* ========================================
+   SCROLL REVEAL
+   ======================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   HERO LOAD ANIMATION
+   ======================================== */
+.hero-load {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-load-delay-1 { animation-delay: 0.1s; }
+.hero-load-delay-2 { animation-delay: 0.25s; }
+.hero-load-delay-3 { animation-delay: 0.4s; }
+.hero-load-delay-4 { animation-delay: 0.55s; }
+
+@keyframes heroFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
    HEADER & NAVIGATION
    ======================================== */
 .header {
@@ -115,14 +151,30 @@ ul {
 .nav-link {
     font-size: 0.875rem;
     color: #666;
-    transition: color 0.2s ease;
+    transition: color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     display: flex;
     align-items: center;
     gap: 6px;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #1A1A1A;
+    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nav-link:hover {
     color: #1A1A1A;
+}
+
+.nav-link:hover::after {
+    width: 100%;
 }
 
 .nav-num {
@@ -139,19 +191,10 @@ ul {
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.05em;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     align-items: center;
     gap: 8px;
-}
-
-@media (min-width: 768px) {
-    .resume-btn {
-        display: inline-flex;
-    }
-}
-
-.resume-btn:hover {
-    opacity: 0.8;
 }
 
 /* Mobile Menu */
@@ -448,13 +491,17 @@ ul {
     font-size: 0.875rem;
     color: #1A1A1A;
     background-color: transparent;
-    transition: all 0.2s ease;
+    transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     white-space: nowrap;
 }
 
 .pill:hover {
     border-color: #1A1A1A;
-    transform: translateY(-1px);
+    background-color: #1A1A1A;
+    color: #EDE9E3;
+    transform: translateY(-2px);
 }
 
 /* ========================================
@@ -603,11 +650,13 @@ ul {
     font-weight: 500;
     letter-spacing: 0.08em;
     color: #666;
-    transition: color 0.2s ease;
+    transition: color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                gap 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .project-link:hover {
     color: #1A1A1A;
+    gap: 10px;
 }
 
 .project-light .divider {
